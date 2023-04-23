@@ -1,0 +1,68 @@
+@startuml
+left to right direction
+skin rose
+
+class Libro{
+-isbn: String
+-titulo: String
+-autor: String
+-categoria: String
+-calificacion: String
++libro(isbn: String, titulo: String, autor: String, categoria: String ,
+calificacion: String)
++get's y set's()
+}
+
+class Socio{
+-nombre: String
+-apellido: String
+-correoElectronico: String
+-numeroSocio: int
+-contrasenia: String
+-librosEnPrestamo Libro []
+
++Socio(nombre: String, apellido: String, correoElectronico: String,
++numeroDeSocio: int, contrasenia: String)
++agregarLibro(): Libro
++get's y set's()
+}
+
+
+class Sistema{
+-socio: Socio
+-socios: Socio[]
+-libros: Libro[]
++Sistema()
++iniciarSession(numeroDeSocio: int, contrasenia: String): void
++cerrarSession(): void
++realizarPrestamoLibro(isbn: String): void
++obtenerCatalogoLibros(): String
++buscarLibro(isbn: String): Libro
++cargarInformacion(): void
++guardarInformacion(): void
++obtenerDatosSocioLogeado(): String
++calificarLibro(calificacion: String): void
+}
+
+class Utils{
+-Utils()
++validarEmail(email: String): void
+}
+
+class Main{
++main(args: String[]): void
+-iniciarSesion(sistema: Sistema): void
+-menuPrincipal(sistema: Sistema): void
+-menuPrestamo(sistema: Sistema): void
+-editarInformacion(sistema: Sistema): void
+-cambiarContrasenia(sistema: Sistema): void
+-editarCorreo(sistema: Sistema): void
+}
+
+Socio"1" --> "1..5"Libro: recibe
+Socio --> Sistema: se almacena en
+Libro --> Sistema: se almacena en
+Socio --> Main: accede a
+Sistema --> Utils
+
+@enduml
